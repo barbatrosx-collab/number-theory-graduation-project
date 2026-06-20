@@ -1,0 +1,69 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{booktabs}
+\usepackage{needspace}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usepackage{ragged2e}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{subfiles}
+
+\geometry{a4paper, margin=2.5cm, bottom=3cm}
+\setstretch{1.2}
+\setlength{\parskip}{0.8em}
+\setlength{\parindent}{0pt}
+
+\definecolor{theorembg}{RGB}{230, 242, 230}
+\definecolor{theoremframe}{RGB}{50, 120, 50}
+\definecolor{definitionbg}{RGB}{230, 240, 250}
+\definecolor{definitionframe}{RGB}{50, 100, 150}
+\definecolor{headercolor}{RGB}{220, 230, 241}
+\definecolor{examplebg}{RGB}{245, 245, 245}
+\definecolor{warningbg}{RGB}{255, 240, 240}
+\definecolor{discussionbg}{RGB}{235, 245, 255}
+\definecolor{highlightbg}{RGB}{250, 250, 200}
+
+\newtcolorbox{theorembox}[1]{colback=theorembg,colframe=theoremframe,title=#1,
+fonttitle=\bfseries,boxrule=0.5pt,arc=4pt,boxsep=0pt,left=6pt,right=6pt,top=6pt,bottom=6pt,before skip=10pt,after skip=10pt}
+\newtcolorbox{definitionbox}[1]{colback=definitionbg,colframe=definitionframe,title=#1,
+fonttitle=\bfseries,boxrule=0.5pt,arc=4pt,boxsep=0pt,left=6pt,right=6pt,top=6pt,bottom=6pt}
+\newtcolorbox{examplebox}[1]{colback=examplebg,colframe=black,title=#1,fonttitle=\bfseries,
+boxrule=0.5pt,arc=4pt,boxsep=0pt,left=6pt,right=6pt,top=6pt,bottom=6pt}
+\newtcolorbox{warningbox}{colback=warningbg,colframe=red!70!black,title=Uyarı,fonttitle=\bfseries,
+boxrule=0.5pt,arc=4pt,boxsep=0pt,left=6pt,right=6pt,top=6pt,bottom=6pt}
+\newtcolorbox{discussionbox}{colback=discussionbg,colframe=blue!50!black,title=Tartışma Sorusu,
+fonttitle=\bfseries,boxrule=0.5pt,arc=4pt,boxsep=0pt,left=6pt,right=6pt,top=6pt,bottom=6pt}
+\newtcolorbox{highlightbox}{colback=highlightbg,colframe=black,boxrule=0.5pt,sharp corners,
+boxsep=0pt,left=6pt,right=6pt,top=6pt,bottom=6pt}
+
+\def\isSubfile{}
+
+\begin{document}
+
+\subfile{onkisim}
+\clearpage
+\pagenumbering{arabic} % Sayfa numarasını 1, 2, 3... şeklinde başlat
+
+\subfile{ikinci}
+\clearpage
+
+\subfile{ucuncu}
+
+\end{document}

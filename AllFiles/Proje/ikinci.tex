@@ -1,0 +1,1519 @@
+\ifdefined\isSubfile
+\else
+\end{document}
+\f\begin{samepage}
+
+\end{samepage}sSubfile
+\else
+\documentclass[main.tex]{subfiles}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{booktabs}
+\usepackage{needspace}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usepackage{ragged2e}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{array}
+\usepackage{xcolor}
+
+\geometry{a4paper, margin=2.5cm, bottom=3cm}
+\setstretch{1.2}
+\setlength{\parskip}{0.8em}
+\setlength{\parindent}{0pt}
+\begin{document}
+\fi
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm, bottom=3cm}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{booktabs}
+\usepackage{needspace}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usepackage{ragged2e}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{array}
+
+% Renk tanımları
+\definecolor{theorembg}{RGB}{230, 242, 230}
+\definecolor{theoremframe}{RGB}{50, 120, 50}
+\definecolor{definitionbg}{RGB}{230, 240, 250}
+\definecolor{definitionframe}{RGB}{50, 100, 150}
+\definecolor{headercolor}{RGB}{220, 230, 241}
+\definecolor{examplebg}{RGB}{245, 245, 245}
+\definecolor{warningbg}{RGB}{255, 240, 240}
+\definecolor{discussionbg}{RGB}{235, 245, 255}
+\definecolor{highlightbg}{RGB}{250, 250, 200}
+
+% Başlık formatı
+\titleformat{\section}[block]
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+% Teorem kutuları
+\newtcolorbox{theorembox}[1]{
+  colback=theorembg,
+  colframe=theoremframe,
+  title=#1,
+  fonttitle=\bfseries,
+  boxrule=0.5pt,
+  arc=4pt,
+  boxsep=0pt,
+  left=6pt,
+  right=6pt,
+  top=6pt,
+  bottom=6pt,
+  before skip=10pt,
+  after skip=10pt
+}
+
+\newtcolorbox{definitionbox}[1]{
+  colback=definitionbg,
+  colframe=definitionframe,
+  title=#1,
+  fonttitle=\bfseries,
+  boxrule=0.5pt,
+  arc=4pt,
+  boxsep=0pt,
+  left=6pt,
+  right=6pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\newtcolorbox{examplebox}[1]{
+  colback=examplebg,
+  colframe=black,
+  fonttitle=\bfseries,
+  title=#1,
+  boxrule=0.5pt,
+  arc=4pt,
+  boxsep=0pt,
+  left=6pt,
+  right=6pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\newtcolorbox{warningbox}{
+  colback=warningbg,
+  colframe=red!70!black,
+  fonttitle=\bfseries,
+  title=Uyarı,
+  boxrule=0.5pt,
+  arc=4pt,
+  boxsep=0pt,
+  left=6pt,
+  right=6pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\newtcolorbox{discussionbox}{
+  colback=discussionbg,
+  colframe=blue!50!black,
+  fonttitle=\bfseries,
+  title=Tartışma Sorusu,
+  boxrule=0.5pt,
+  arc=4pt,
+  boxsep=0pt,
+  left=6pt,
+  right=6pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\newtcolorbox{highlightbox}{
+  colback=highlightbg,
+  colframe=black,
+  boxrule=0.5pt,
+  sharp corners,
+  boxsep=0pt,
+  left=6pt,
+  right=6pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\begin{document}
+
+% ------------------- BÖLÜM 1 -------------------
+\section*{1.1 Üç Klasik Dönüm Noktası Teoremi}
+
+\begin{tcolorbox}[colback=gray!5, colframe=black]
+\justifying
+Euler, hesaplamalarını nasıl bir insan nefes alıyorsa ya da kartallar rüzgârda süzülüyorsa, o denli zahmetsiz yapardı.
+
+\vspace{0.3cm}
+\raggedleft
+-- François Arago
+\end{tcolorbox}
+
+\justifying
+Bu bölümde ele alacağımız üç klasik teorem — \textbf{Wilson Teoremi}, \textbf{Fermat'ın Küçük Teoremi} ve \textbf{Euler Teoremi} — kongruens teorisinin gelişiminde önemli kilometre taşları olmuştur.
+
+\needspace{8\baselineskip} % Minimum 8 satırlık boşluk yoksa yeni sayfaya geç
+\begin{tcolorbox}[colback=gray!3, colframe=black]
+\begin{minipage}{0.35\textwidth}
+    \centering
+    \includegraphics[width=\linewidth, height=4cm, keepaspectratio]{waring.jpg} % Resim dosyasını doğru şekilde ekledik
+    \captionof{figure}{Edward Waring}
+\end{minipage}
+\hfill
+\begin{minipage}{0.60\textwidth}
+\justifying
+Edward Waring, İngiltere'nin Shrewsbury kentinde doğmuştur. Cambridge Üniversitesi'nde eğitim gördükten sonra genç yaşta Lucasian Matematik Profesörü olarak atanmıştır. Yaşı nedeniyle başta eleştirilen bu atama, 1762'de yayımladığı \textit{Miscellanea Analytica} adlı eseriyle büyük takdir toplamıştır. Royal Society (Kraliyet Bilimler Akademisi) üyesi olan Waring, 1784 yılında Copley Madalyası ile ödüllendirilmiştir. Aynı zamanda tıp eğitimi de almış, 1767'de doktor olmuştur; ancak 1770'te tıp kariyerini bırakarak yalnızca matematiğe odaklanmıştır. Lucasian profesörlüğü ölümüne kadar sürmüştür.
+\end{minipage}
+\end{tcolorbox}
+
+\vspace{0.5cm} % Küçük bir boşluk
+
+\begin{tcolorbox}[colback=gray!3, colframe=black]
+John Wilson, İngiltere'nin Westmoreland bölgesinde doğmuştur. Cambridge Üniversitesi'nde eğitim aldıktan sonra özel öğretmenlik yapmış, ardından hukuk alanında kariyer yaparak 1786'da yargıç olmuştur.
+
+Matematikle olan ilgisi öğrencilik yıllarında başlamıştır. Royal Society üyeliğiyle bilim çevrelerinde saygınlık kazanmış, 1793 yılında vefat etmiştir.
+\end{tcolorbox}
+
+% ------------------- BÖLÜM 2 -------------------
+\section*{1.2 Wilson Teoremi ve Uygulamaları}
+
+Baron Gottfried Wilhelm Leibniz (1646-1716), bu sonucu 1682 gibi erken bir tarihte biliyordu; ancak bunu yayımlamamıştır.
+
+Önceki bölümlerde geçen 1.6 numaralı sonuçtan hatırlanacağı üzere, $ax \equiv 1 \pmod{m}$ kongruansı ancak ve ancak $(a, m) = 1$ ise tek bir çözüm verir. Bu çözüm, $a$'nın mod $m$ altındaki çarpma tersidir ve $a^{-1}$ ile gösterilir.
+
+Özellikle modül bir asal sayı $p$ olduğunda, $1$ ile $p-1$ arasındaki tüm pozitif kalıntılar terslenebilir.  
+Örneğin $p = 7$ için:
+\[
+1 \cdot 1 \equiv 2 \cdot 4 \equiv 3 \cdot 5 \equiv 6 \equiv 1 \pmod{7}
+\]
+
+\needspace{15\baselineskip} % Teorem için yeterli alan yoksa yeni sayfaya geç
+\begin{theorembox}{Lemma 1.2}
+Bir asal sayı $p$ ve $a$ pozitif tamsayısı için:
+
+$a$ mod $p$ altında kendine eş ters (self-invertible) ise, o halde $a \equiv \pm 1 \pmod{p}$
+
+\textbf{Kanıt:}  
+$a$ kendine tersse, $a^2 \equiv 1 \pmod{p}$ olur. Bu da $p \mid (a^2 - 1)$ anlamına gelir, yani $p \mid (a - 1)(a + 1)$. Lemma 1.3'e göre bu durumda $p \mid (a - 1)$ veya $p \mid (a + 1)$ olmalıdır. Dolayısıyla $a \equiv 1$ ya da $a \equiv -1 \pmod{p}$ olur.
+
+Tersine, $a \equiv 1$ veya $a \equiv -1 \pmod{p}$ olduğunda, her iki durumda da $a^2 \equiv 1 \pmod{p}$ sağlanır. Bu da $a$'nın kendine ters olduğunu gösterir.
+\end{theorembox}
+
+\begin{theorembox}{Teorem 1.3 (Wilson Teoremi)}
+Eğer $p$ asal sayı ise, o zaman:
+\[
+(p - 1)! \equiv -1 \pmod{p}
+\]
+\textbf{Kanıt:}  
+$p = 2$ için $(p - 1)! = 1 \equiv -1 \pmod{2}$, yani teorem sağlanır.
+
+$p > 2$ olsun. Corollary 1.6'ya göre $1$ ile $p - 1$ arasındaki tüm sayılar mod $p$ altında terslenebilir. Ancak Lemma 1.2'ye göre yalnızca $1$ ve $p - 1$ kendilerine eş tersi elemanlardır.
+
+Geriye kalan $(p - 3)$ sayı, $(p - 3)/2$ çift olacak şekilde eşlenebilir. Her bir çift $(a, a^{-1})$ biçimindedir ve $a \cdot a^{-1} \equiv 1 \pmod{p}$ olur.
+
+Dolayısıyla:
+\[
+(p - 1)! = 1 \cdot [2 \cdot 3 \cdots (p - 2)] \cdot (p - 1)
+\equiv 1 \cdot 1 \cdot (p - 1) \equiv -1 \pmod{p}
+\]
+\end{theorembox}
+
+\paragraph{Örnek 1.1}  
+$p = 11$ için $(p - 1)! = 10! = 1 \cdot 2 \cdot \dots \cdot 10$
+
+Kalanlar, çarpımları $1$ olacak şekilde eşleştirilebilir:
+\[
+10! = 1 \cdot (2 \cdot 6) \cdot (3 \cdot 4) \cdot (5 \cdot 9) \cdot (7 \cdot 8) \cdot 10
+\equiv 1 \cdot 1 \cdot 1 \cdot 1 \cdot 1 \cdot 10 \equiv 10 \equiv -1 \pmod{11}
+\]
+
+\pagebreak % Mantıklı bir sayfa sonu
+\begin{theorembox}{Teorem 1.4 (Asallık Testi)}
+Eğer $(n - 1)! \equiv -1 \pmod{n}$ ise, $n$ asal bir sayıdır.
+
+\textbf{Kanıt:}  
+Eğer $n$ asal değilse, $n = ab$ şeklinde yazılabilir. Ancak bu durumda $(n - 1)!$ içinde hem $a$ hem $b$ yer alır ve bu çarpım $n$'yi böler. Bu da $(n - 1)! \equiv 0 \pmod{n}$ anlamına gelir — çelişki. Dolayısıyla $n$ asal olmalıdır.
+\end{theorembox}
+
+% ------------------- BÖLÜM 3 -------------------
+\section*{1.3 Wilson Teoremi'nin Genellemesi ve Uygulamaları}
+
+\paragraph{Örnek 1.3}  
+$p$ asal ve $n$ pozitif tamsayı olsun. Aşağıdaki kongruansı ispatlayınız:
+\[
+\frac{(np)!}{n! \cdot p^n} \equiv (-1)^n \pmod{p}
+\]
+
+\textbf{Çözüm:}  
+Öncelikle şu gözlem yapılabilir: $a \equiv 1 \pmod{p}$ olan herhangi bir pozitif $a$ için, Wilson Teoremi'ne göre:
+\[
+a(a + 1) \cdots [a + (p - 2)] \equiv (p - 1)! \equiv -1 \pmod{p}
+\]
+
+Yani $p$'nin ardışık katları arasında kalan $p - 1$ sayının çarpımı $-1$'e denktir. Bu şekilde:
+\[
+\frac{(np)!}{n! \cdot p^n} = \frac{(np)!}{p \cdot 2p \cdot 3p \cdots np}
+= \prod_{r=1}^{n} [(r-1)p + 1] \cdots [(r-1)p + (p-1)]
+\equiv \prod_{r=1}^{n} (p - 1)! \equiv (-1)^n \pmod{p}
+\]
+
+Örneğin $p = 5$ ve $n = 46$ için:
+\[
+\frac{230!}{46! \cdot 5^{46}} \equiv (-1)^{46} \equiv 1 \pmod{5}
+\]
+
+\needspace{10\baselineskip}
+\begin{theorembox}{Teorem 1.5}
+1957 yılında New York'tan F. G. Elston, Wilson Teoremi'ni genellemiştir:  
+$p$ asal ve $0 \leq r \leq p - 1$ olmak üzere,
+\[
+r!(p - 1 - r)! + (-1)^r \equiv 0 \pmod{p}
+\]
+\end{theorembox}
+
+\begin{theorembox}{Teorem 1.6 (Wilson Teoremi'nin Tersi)}
+Eğer $n$ pozitif tamsayı olup $(n - 1)! \equiv -1 \pmod{n}$ ise, o zaman $n$ asal sayıdır.
+
+\textbf{İspat:}  
+Tersine varsayalım: $n$ asal değil ve $n = ab$ şeklinde $1 < a, b < n$ faktörlerine ayrılıyor olsun.
+
+$n \mid (n - 1)! + 1$ olduğu varsayılırsa ve $a \mid n$ olduğuna göre, $a \mid (n - 1)! + 1$ olur.  
+Ancak $a$ sayısı $n$'den küçük olduğu için $(n - 1)!$'nın bir bölenidir. Bu durumda:
+\[
+a \mid [(n - 1)! + 1 - (n - 1)!] = 1
+\]
+Bu yalnızca $a = 1$ için mümkündür. Ancak bu $1 < a$ varsayımıyla çelişir. Dolayısıyla $n$ asal olmalıdır.
+\end{theorembox}
+
+\textbf{Not:} Teorem 1.5 ve 1.6 birlikte ele alındığında, şu sonuç elde edilir:
+
+\begin{center}
+\textit{Bir $n \geq 2$ pozitif tamsayısı asal sayı ise ve ancak $(n - 1)! \equiv -1 \pmod{n}$ koşulu sağlanır.}
+\end{center}
+
+\textbf{Örnek:}  
+$(7 - 1)! = 720 \equiv -1 \pmod{7}$ olduğundan 7 asaldır.  
+$(12 - 1)! = 39,916,800 \equiv 0 \pmod{12}$ olduğu için 12 asal değildir.
+
+Ancak, bu test pratikte kullanışlı değildir çünkü $(n - 1)!$ çok büyük olur.
+
+\subsection*{Faktöriyel, Multifaktöriyel ve Primorial Asallar}
+
+\begin{itemize}[leftmargin=1.5em, noitemsep, topsep=0pt]
+    \item \textbf{Faktöriyel Asallar:}  
+    $m! + 1$ şeklinde asal olan sayılar vardır. Örneğin $1! + 1 = 2$, $2! + 1 = 3$, $3! + 1 = 7$ asaldır.  
+    2005 itibariyle en büyük bilinen bu tür asal $32659! + 1$ olup 44,416 basamaktan oluşmaktadır.
+
+    \item $n! - 1$ da bazı $n$'ler için asal olabilir. Örneğin $n = 3, 4, 6$ için geçerlidir. En büyük bilinen örnek $974! - 1$'dir.
+
+    \item \textbf{Pillai'nin Sorusuna Örnek:}  
+    S. S. Pillai 1930'da $n! + 1$'in asal bölenlerinin $n \pmod{n}$ altında $1$'e denk olup olmadığını sormuştur. Chowla ise iki karşı örnek bulmuştur:
+    \[
+    14! + 1 \equiv 0 \pmod{23}, \quad 18! + 1 \equiv 0 \pmod{23}
+    \]
+
+    \item \textbf{Multifaktöriyel Asallar:}  
+    $n!_k = n(n-k)(n-2k)\cdots$ biçimindedir.  
+    Örneğin: $7!_3 + 1 = 7(4)(1) + 1 = 29$ asal bir sayıdır.
+
+    \item \textbf{Primorial Asallar:}  
+    $n\# = $ $n$'den küçük veya eşit asal sayıların çarpımıdır.  
+    Örneğin: $10\# + 1 = 2 \cdot 3 \cdot 5 \cdot 7 + 1 = 211$ asal bir sayıdır.
+\end{itemize}
+
+% ------------------- BÖLÜM 1.4 -------------------
+\section*{1.4 Fermat'nın Küçük Teoremi ve Uygulamaları}
+
+\begin{tcolorbox}[colback=gray!5, colframe=black]
+\justifying
+"Matematik bilimlerin kraliçesidir ve sayı teorisi matematiğin kraliçesidir."
+
+\vspace{0.3cm}
+\raggedleft
+-- Carl Friedrich Gauss
+\end{tcolorbox}
+
+\justifying
+18 Ekim 1640'ta, Fermat, Fransız darphanesinde görevli ve sayı teorisinde yetenekli bir öğrenci olan Bernhard Frenicle de Bessy'ye (1605-1675) bir mektup yazdı. Mektubunda, Fermat şu sonucu iletti: Eğer $p$ bir asal sayı ise ve $p \nmid a$, o zaman $p \mid a^{p-1} - 1$. Fermat, bu sonucun bir kanıtını vermedi fakat çok uzun olmadıkça kanıtı göndereceğini belirtti. Bu sonuç, \textbf{Fermat'nın Küçük Teoremi} olarak bilinir, bu isim, Fermat'nın son teoreminden ayırt edebilmek için kullanılmaktadır. Bu arada, Fermat'nın küçük teoremindeki $a = 2$ özel durumu, M.Ö. 500 civarında Çinliler tarafından bilinmekteydi.
+
+Fermat'nın küçük teoremine ilk kanıt, 1736'da Euler tarafından verildi. Fermat'nın açıklamasından neredeyse bir yüzyıl sonra. Leibniz ise Euler'den yaklaşık 50 yıl önce yayımlanmayan bir çalışmasında aynı kanıtı vermişti, ancak bir kez daha Leibniz, hak ettiği payı alamadı.
+
+\begin{theorembox}{Teorem 1.7 (Fermat'nın Küçük Teoremi)}
+Eğer $p$ bir asal sayı ve $a$ herhangi bir tam sayı olmak üzere $p \nmid a$ ise, o zaman:
+\[
+a^{p-1} \equiv 1 \pmod{p}
+\]
+\end{theorembox}
+
+\subsection*{Lemma 1.4}
+Fermat'nın küçük teoreminin kanıtı için aşağıdaki lema gereklidir:
+
+\begin{theorembox}{Lemma 1.4}
+$p$ bir asal sayı ve $a$ herhangi bir tam sayı olmak üzere $p \nmid a$. O zaman, $a, 2a, 3a, \dots, (p-1)a$ tam sayılarının mod $p$ altındaki en küçük kalıntıları, $1, 2, 3, \dots, (p-1)$ sayılarının bir permütasyonu ile aynıdır.
+
+\textbf{Kanıt:}  
+Kanıt iki kısımdan oluşmaktadır:
+\begin{enumerate}
+    \item İlk olarak, $ia \equiv 0 \pmod{p}$ olduğunu göstereceğiz, burada $1 \leq i \leq p - 1$. 
+
+    Diyelim ki $ia \equiv 0 \pmod{p}$. O zaman $p \mid ia$. Ancak $(p, a) = 1$ olduğundan, $p \mid i$ olamaz, çünkü $i < p$. Bu durumda, $ia \equiv 0 \pmod{p}$ olamaz.
+
+    \item İkinci olarak, $ia \equiv ja \pmod{p}$ olduğunda $i = j$ olduğunu göstereceğiz, burada $1 \leq i, j \leq p - 1$ ve $i \neq j$.
+
+    Diyelim ki $ia \equiv ja \pmod{p}$. Çünkü $(p, a) = 1$, Teorem 1.6'ya göre $i \equiv j \pmod{p}$ olmalıdır. Ancak hem $i$ hem de $j$ mod $p$ altında en küçük kalıntılar olduğundan, $i = j$ olmalıdır.
+\end{enumerate}
+\end{theorembox}
+
+\begin{theorembox}{Teorem 1.8 (Fermat'nın Küçük Teoremi)}
+Eğer $p$ bir asal sayı ve $a$ herhangi bir tam sayı olmak üzere $p \nmid a$, o zaman:
+\[
+a^{p-1} \equiv 1 \pmod{p}
+\]
+
+\textbf{Kanıt:}  
+Lemma 1.4'e göre, $a, 2a, 3a, \dots, (p-1)a$ tam sayılarının mod $p$ altındaki en küçük kalıntıları, $1, 2, 3, \dots, (p-1)$ sayılarının bir permütasyonu ile aynıdır. Bu durumda, bu sayıların çarpımları mod $p$ altında eşit olur; yani:
+\[
+a \cdot 2a \cdot 3a \cdot \dots \cdot (p-1)a \equiv 1 \cdot 2 \cdot 3 \cdot \dots \cdot (p-1) \pmod{p}
+\]
+Başka bir deyişle:
+\[
+(p-1)! \cdot a^{p-1} \equiv (p-1)! \pmod{p}
+\]
+Çünkü $(p-1)!$ ile $p$ aralarında asal olduğundan:
+\[
+a^{p-1} \equiv 1 \pmod{p}
+\]
+\end{theorembox}
+
+\subsection*{Uygulamalar ve Örnekler}
+
+\begin{examplebox}{Örnek 1.4}
+$p = 7$ ve $a = 12$ olarak alalım. Lemma 1.4'e göre, $1 \cdot 12, 2 \cdot 12, 3 \cdot 12, 4 \cdot 12, 5 \cdot 12, 6 \cdot 12$ sayılarının mod 7 altındaki en küçük kalıntıları, 1'den 6'ya kadar olan sayılarla bir permütasyon oluşturur. Bu durumda:
+\[
+(1 \cdot 12)(2 \cdot 12)(3 \cdot 12)(4 \cdot 12)(5 \cdot 12)(6 \cdot 12) \equiv 1 \cdot 2 \cdot 3 \cdot 4 \cdot 5 \cdot 6 \pmod{7}
+\]
+Yani:
+\[
+6! \cdot 12^6 \equiv 6! \pmod{7}
+\]
+Çünkü $(6!, 7) = 1$, bu da şu sonuca yol açar:
+\[
+12^6 \equiv 1 \pmod{7}
+\]
+\end{examplebox}
+
+\begin{examplebox}{Örnek 1.5}
+$24^{1947}$ sayısının 17'ye bölümünden kalan nedir?
+
+\textbf{Çözüm:}  
+$24 \equiv 7 \pmod{17}$ olduğundan:
+\[
+24^{1947} \equiv 7^{1947} \pmod{17}
+\]
+Fermat'nın küçük teoremine göre:
+\[
+7^{16} \equiv 1 \pmod{17}
+\]
+Dolayısıyla:
+\[
+7^{1947} = 7^{16 \cdot 121 + 11} = (7^{16})^{121} \cdot 7^{11} \equiv 1^{121} \cdot 7^{11} \equiv 7^{11} \pmod{17}
+\]
+
+Şimdi:
+\[
+7^2 \equiv -2 \pmod{17}
+\quad \Rightarrow \quad
+7^{11} = (7^2)^5 \cdot 7 \equiv (-2)^5 \cdot 7 \equiv -32 \cdot 7 \pmod{17}
+\]
+
+\[
+-32 \cdot 7 = -224 \equiv 14 \pmod{17}
+\]
+
+Sonuç olarak, $24^{1947}$'nin 17'ye bölümünden kalan 14'tür.
+\end{examplebox}
+
+\subsection*{Özel Durum İncelemesi}
+
+\begin{examplebox}{Örnek 1.6}
+Aşağıdaki ifadenin tam kare olduğu asal sayılar $p$'leri bulunuz:
+\[
+\frac{2^{p-1}-1}{p} = n^2
+\]
+
+\textbf{Çözüm:}  
+Diyelim ki:
+\[
+2^{p-1} - 1 = p n^2
+\]
+Açıkça görülür ki, $p$ ve $n$ sayılarının her ikisi de tek olmalıdır. O halde $p = 2k + 1$ olsun, burada $k$ pozitif bir tam sayıdır. Böylece:
+\[
+2^{2k} - 1 = p n^2
+\]
+yazılabilir. Bu da:
+\[
+(2^k - 1)(2^k + 1) = p n^2
+\]
+demektir. $2^k - 1$ ve $2^k + 1$ ardışık tek sayılar olduğundan, aralarında asaldır. Dolayısıyla, bu iki sayıdan biri mutlaka bir tam kare olmalıdır.
+
+\begin{enumerate}
+    \item $2^k - 1 = r^2$ durumu:
+    \[
+    2^k = r^2 + 1
+    \]
+    Bu durumda $r = 1$ ve $k = 1$ olur, dolayısıyla $p = 3$.
+
+    \item $2^k + 1 = s^2$ durumu:
+    \[
+    2^k = s^2 - 1 = (s - 1)(s + 1)
+    \]
+    Bu durumda $s = 3$ ve $k = 3$ olur, dolayısıyla $p = 7$.
+\end{enumerate}
+
+Sonuç olarak, istenilen koşulu sağlayan asal sayılar $p = 3$ ve $p = 7$'dir:
+\[
+\frac{2^{2}-1}{3} = 1 = 1^2, \quad \frac{2^{6}-1}{7} = 9 = 3^2
+\]
+\end{examplebox}
+
+% ------------------- BÖLÜM 1.5 -------------------
+\section*{1.5 Fermat'nın Küçük Teoremi'nin Uygulamaları ve Genişletmeler}
+
+\subsection*{Teorem 1.9: $a^{p-2}$, mod $p$'ye göre $a$'nın tersi}
+
+\begin{theorembox}{Teorem 1.9}
+$p$ bir asal sayı ve $a$, $p$ ile aralarında asal olan herhangi bir tamsayı olsun. O zaman $a^{p-2}$, mod $p$'ye göre $a$'nın tersidir.
+
+\textbf{Kanıt:}\\
+Fermat'nın küçük teoremine göre $a^{p-1} \equiv 1 \pmod{p}$. Yani:
+\[
+a \cdot a^{p-2} \equiv 1 \pmod{p}
+\]
+Bu da $a^{p-2}$'nin mod $p$'ye göre $a$'nın tersi olduğunu gösterir.
+\end{theorembox}
+
+\begin{examplebox}{Örnek 1.7: $a^{p-2}$ ile Ters Hesaplama}
+$p = 7$ ve $a = 12$ olsun. O zaman, Teorem 1.9'a göre $12^5$, mod 7'ye göre 12'nin tersidir.
+
+$12 \equiv -2 \pmod{7}$ olduğundan:
+\[
+12^5 \equiv (-2)^5 = 4 \cdot (-8) = -32 \equiv 3 \pmod{7}
+\]
+Dolayısıyla:
+\[
+12 \cdot 3 = 36 \equiv 1 \pmod{7}
+\]
+Yani $3$, mod 7'ye göre $12$'nin tersidir.
+\end{examplebox}
+
+\subsection*{Teorem 1.10: Lineer Kongruansların Çözümü}
+
+\begin{theorembox}{Teorem 1.10}
+$p$ bir asal sayı ve $a$, $p$ ile aralarında asal olan herhangi bir tamsayı olsun. O zaman $ax \equiv b \pmod{p}$ lineer kongruansının çözümü:
+\[
+x \equiv a^{p-2}b \pmod{p}
+\]
+
+\textbf{Kanıt:}\\
+$a$ ile $p$ aralarında asal olduğundan, Korollar 1.6'ya göre $ax \equiv b \pmod{p}$ kongruansının bir tane çözümü vardır.\\
+Teorem 1.9'a göre $a^{p-2}$, mod $p$'ye göre $a$'nın tersidir. Her iki taraf $a^{p-2}$ ile çarpılırsa:
+\[
+a^{p-2}(ax) \equiv a^{p-2}b \Rightarrow a^{p-1}x \equiv a^{p-2}b \pmod{p}
+\]
+Fermat'nın küçük teoremine göre $a^{p-1} \equiv 1 \pmod{p}$ olduğundan:
+\[
+x \equiv a^{p-2}b \pmod{p}
+\]
+\end{theorembox}
+
+\begin{examplebox}{Örnek 1.8: $12x \equiv 6 \pmod{7}$}
+Lineer kongruansı çözünüz:
+\[
+12x \equiv 6 \pmod{7}
+\]
+
+\textbf{Çözüm:}\\
+$12^5 \equiv 3 \pmod{7}$, yani 3, mod 7'ye göre 12'nin tersidir.
+
+Kongruansın her iki tarafını 3 ile çarpalım:
+\[
+3 \cdot (12x) \equiv 3 \cdot 6 \pmod{7} \Rightarrow x \equiv 18 \equiv 4 \pmod{7}
+\]
+\end{examplebox}
+
+\begin{examplebox}{Örnek 1.9: $24x \equiv 11 \pmod{17}$}
+Lineer kongruansı çözünüz:
+\[
+24x \equiv 11 \pmod{17}
+\]
+
+\textbf{Çözüm:}\\
+$24 \equiv 7 \pmod{17}$ olduğundan denklem şu hale gelir:
+\[
+7x \equiv 11 \pmod{17}
+\]
+
+Teorem 1.10'a göre:
+\[
+x \equiv 7^{15} \cdot 11 \pmod{17}
+\]
+
+\begin{align*}
+7^2 &\equiv -2 \pmod{17}, \\
+7^4 &\equiv 4 \pmod{17}, \\
+7^8 &\equiv -1 \pmod{17} \\
+\Rightarrow 7^{15} &= 7^8 \cdot 7^4 \cdot 7^2 \cdot 7 \\
+&\equiv (-1) \cdot 4 \cdot (-2) \cdot 7 \pmod{17} \\
+&\equiv 5 \pmod{17} \\
+\Rightarrow x &\equiv 5 \cdot 11 = 55 \equiv 4 \pmod{17}
+\end{align*}
+\end{examplebox}
+
+\clearpage
+\section*{1.6 $2^n + 1$ Sayısının Çarpanları ve Gözlem}
+
+$N = 2^n + 1$ ifadesinin çeşitli $n$ değerleri için asal çarpanlara ayrılmasını inceleyelim.
+
+\begin{longtable}{|c|c|c|c|}
+\hline
+\textbf{$n$} & \textbf{$2^n + 1$} & \textbf{$n$} & \textbf{$2^n + 1$} \\
+\hline
+\endfirsthead
+\hline
+\textbf{$n$} & \textbf{$2^n + 1$} & \textbf{$n$} & \textbf{$2^n + 1$} \\
+\hline
+\endhead
+\hline
+1  & $3$                     & 5  & $3 \cdot 11$ \\
+2  & $5$                     & 6  & $5 \cdot 13$ \\
+3  & $3^2$                   & 7  & $3 \cdot 43$ \\
+4  & $17$                    & 8  & $257$ \\
+9  & $3^3 \cdot 19$          & 13 & $3 \cdot 2731$ \\
+10 & $5^2 \cdot 41$          & 14 & $5 \cdot 29 \cdot 113$ \\
+11 & $3 \cdot 683$           & 15 & $3^2 \cdot 11 \cdot 331$ \\
+12 & $17 \cdot 241$          & 16 & $65537$ \\
+\hline
+\caption{Tablo 1.1: Farklı $n$ değerleri için $2^n + 1$ ifadelerinin asal çarpanları}
+\label{tab:2nplus1}
+\end{longtable}
+
+\vspace{1em}
+
+Bu gözlemi doğrulamak için, $p$ sayısının $N$'nin asal çarpanları içinde ilk kez yer aldığı en küçük üs $n$ ile başlayalım.
+
+Bu durumda:  
+\[
+2^n \equiv -1 \pmod{p} \Rightarrow 2^{2n} \equiv 1 \pmod{p}
+\]
+
+Güvercin yuvası ilkesine göre, $2^1, 2^2, \ldots, 2^{p+1}$ sayıların tümü mod $p$ altında farklı olamaz. Bu nedenle:
+\[
+\exists \, a < b \quad \text{öyle ki} \quad 2^a \equiv 2^b \pmod{p} \Rightarrow 2^{b-a} \equiv 1 \pmod{p}
+\]
+
+Bu durumda, iyi sıralama ilkesine göre $2^d \equiv 1 \pmod{p}$ sağlayan en küçük pozitif $d$ tamsayısı vardır.
+
+$t$ pozitif bir tamsayı ve $2^t \equiv 1 \pmod{p}$ ise:
+\[
+t = qd + r \quad \text{ve} \quad 0 \leq r < d
+\]
+\[
+2^t = 2^{qd + r} = (2^d)^q \cdot 2^r \equiv 1^q \cdot 2^r = 2^r \pmod{p}
+\]
+
+Ancak $r < d$ olduğundan bu yalnızca $r = 0$ için mümkündür. O halde $t = qd$ ve $d \mid t$.
+
+\bigskip
+
+Daha önce $2^n \equiv -1 \pmod{p}$ olduğunu biliyorduk. O halde:
+\[
+2^{2n} \equiv 1 \pmod{p} \Rightarrow d \mid 2n
+\]
+
+Ama $2^d \equiv 1$ ve $2^n \equiv -1$ olduğundan $d \ne n$ olmalıdır. Eğer $d < n$ olursa:
+\[
+2^{n - d} \equiv -1 \pmod{p}
+\]
+elde edilir ki bu, $n$'nin en küçük üs olma özelliğine aykırıdır. O halde $d > n$ ve $d \mid 2n$ olduğuna göre:
+\[
+d = 2n
+\]
+
+Fermat'ın küçük teoremine göre:
+\[
+2^{p-1} \equiv 1 \pmod{p} \Rightarrow d \mid (p - 1)
+\Rightarrow p \equiv 1 \pmod{d} \Rightarrow p \equiv 1 \pmod{n}
+\]
+
+\textbf{Sonuç olarak}, $p$ sayısı $2^n + 1$'in asal çarpanları arasında ilk kez ortaya çıkıyorsa, o zaman:
+\[
+\boxed{p \equiv 1 \pmod{n}}
+\]
+olması gerekir.
+
+% ------------------- BÖLÜM 1.7 -------------------
+\section*{1.7 Fermat'nın Küçük Teoremi'nin Genişletilmiş Formları}
+
+\begin{theorembox}{Teorem 1.11: $a^p \equiv a \pmod{p}$ (Fermat'nın Küçük Teoremi Genişletilmiş Formu)}
+$p$ bir asal sayı ve $a$ herhangi bir pozitif tamsayı olsun. O halde:
+\[
+a^p \equiv a \pmod{p}
+\]
+
+\textbf{Kanıt (durumlara göre):}
+
+\textbf{Durum 1:} $p \nmid a$ (Fermat'nın orijinal formu)\\
+Fermat'nın küçük teoremine göre $a^{p-1} \equiv 1 \pmod{p}$.\\
+Bu durumda:
+\[
+a^p = a \cdot a^{p-1} \equiv a \cdot 1 = a \pmod{p}
+\]
+
+\textbf{Durum 2:} $p \mid a$\\
+$a \equiv 0 \pmod{p}$ olduğundan:
+\[
+a^p \equiv 0 \equiv a \pmod{p}
+\]
+
+Her iki durumda da teorem sağlanır.
+\end{theorembox}
+
+\begin{examplebox}{Örnek 1.10: Teorem 1.11 Uygulaması}
+$p = 5$ ve $a = 2$ için:
+\[
+2^5 = 32 \equiv 2 \pmod{5}
+\]
+$p = 7$ ve $a = 28$ için ($28 \equiv 0 \pmod{7}$):
+\[
+28^7 \equiv 0 \equiv 28 \pmod{7}
+\]
+\end{examplebox}
+
+\begin{theorembox}{Teorem 1.12: $a^{\lambda + 1} \equiv a \pmod{n}$ (Çoklu Asal Genişleme)}
+$n = p_1p_2 \cdots p_k$ farklı asalların çarpımı, $a$ herhangi bir tamsayı ve
+\[
+\lambda = \text{lcm}(p_1 - 1, p_2 - 1, \ldots, p_k - 1)
+\]
+olmak üzere:
+\[
+a^{\lambda + 1} \equiv a \pmod{n}
+\]
+
+\textbf{Kanıt:} Her $p_i$ için Fermat teoremiyle:
+\[
+a^{p_i - 1} \equiv 1 \pmod{p_i} \Rightarrow a^\lambda \equiv 1 \pmod{p_i}
+\]
+\[
+\Rightarrow a^{\lambda + 1} \equiv a \pmod{p_i} \Rightarrow a^{\lambda + 1} \equiv a \pmod{n}
+\]
+\end{theorembox}
+
+\begin{examplebox}{Örnek 1.11: Teorem 1.12 Uygulaması}
+$n = 3 \cdot 7 \cdot 11 = 231$ için:
+\[
+\lambda = \text{lcm}(2,6,10) = 30 \Rightarrow a^{31} \equiv a \pmod{231}
+\]
+$a = 5$ için:
+\[
+5^{31} \equiv 5 \pmod{231} \quad (\text{Doğrulama: } 5^{30} = (5^6)^5 \equiv 1^5 = 1 \pmod{231})
+\]
+\end{examplebox}
+
+\begin{theorembox}{Sonuç 1.3: $a^p \equiv a \pmod{6p}$}
+$p > 3$ asalı ve her $a$ tamsayısı için:
+\[
+a^p \equiv a \pmod{6p}
+\]
+
+\textbf{Kanıt:} Teorem 1.12'de $n = 2 \cdot 3 \cdot p$ alınırsa:
+\[
+\lambda = \text{lcm}(1,2,p-1) = p-1 \Rightarrow a^p \equiv a \pmod{6p}
+\]
+\end{theorembox}
+
+\begin{examplebox}{Örnek 1.12: Sonuç 1.3 Uygulaması}
+$p = 5$, $a = 4$ için:
+\[
+4^5 = 1024 \equiv 4 \pmod{30} \quad (\text{Çünkü } 1020 \div 30 = 34)
+\]
+\end{examplebox}
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, title={Tarihsel Not}]
+Bu genişletmeler ilk olarak 19. yüzyılda Carmichael tarafından incelenmiştir. $\lambda(n)$ fonksiyonu günümüzde \textbf{Carmichael fonksiyonu} olarak bilinir.
+\end{tcolorbox}
+
+% ------------------- BÖLÜM 1.8 -------------------
+\section*{1.8 Pollard p-1 Çarpanlara Ayırma Yöntemi}
+
+1974 yılında Pollard, Fermat'nın küçük teoremine dayalı bir çarpanlara ayırma yöntemi geliştirmiştir. Bu yöntem \textbf{Pollard $p - 1$ yöntemi} olarak adlandırılır.
+
+$n$ bileşik ve tek bir tamsayı olsun. $p$, $n$'nin asal bir böleni ve $p - 1$ sayısı yalnızca küçük asal çarpanlara sahip olsun. Eğer $k$ yeterince büyük bir pozitif tamsayı ise ve $(p - 1) \mid k!$ sağlanıyorsa, bu yöntem etkili biçimde çalışır.
+
+\begin{examplebox}{Örnek 1.15: Temel Prensip}
+$p = 2393$ için:
+\[
+p - 1 = 2392 = 2^3 \cdot 13 \cdot 23 \Rightarrow (p - 1) \mid 23!
+\]
+
+Fermat'nın küçük teoremine göre:
+\[
+2^{p - 1} \equiv 1 \pmod{p} \Rightarrow 2^{k!} = (2^{p - 1})^m \equiv 1^m = 1 \pmod{p}
+\Rightarrow p \mid (2^{k!} - 1)
+\]
+
+Eğer $r \equiv 2^{k!} \pmod{n}$ ise:
+\[
+r - 1 \equiv 2^{k!} - 1 \pmod{n}
+\Rightarrow \gcd(r - 1, n)
+\]
+bu durumda $p$ bu ifadeyi böler ve sıfırdan farklı bir bölen bulunmuş olur.
+\end{examplebox}
+
+\subsection*{Algoritma Adımları}
+
+\begin{enumerate}
+    \item $2^{k!}$ değerini kademeli olarak hesapla:
+    \[
+    2^{k!} = ((((2^1)^2)^3)^4 \cdots )^k
+    \]
+    \item Mod $n$ altında $r \equiv 2^{k!} \pmod{n}$ hesapla.
+    \item $\gcd(r - 1, n)$ değerini al.
+    \item Sonuç $1$ veya $n$ değilse, bu bir çarpandır.
+\end{enumerate}
+
+\begin{examplebox}{Örnek 1.16: n = 2813 için Uygulama}
+Pollard $p - 1$ yöntemi ile $n = 2813$'ün sıfırdan farklı bir çarpanını bulalım:
+
+\begin{align*}
+k = 1: &\quad 2^{1!} = 2 \Rightarrow \gcd(1, 2813) = 1 \\
+k = 2: &\quad 2^{2!} = 4 \Rightarrow \gcd(3, 2813) = 1 \\
+k = 3: &\quad 2^6 = 64 \Rightarrow \gcd(63, 2813) = 1 \\
+k = 4: &\quad 2^{24} \equiv 484 \pmod{2813} \Rightarrow \gcd(483, 2813) = 1 \\
+k = 5: &\quad 2^{120} \equiv 1648 \pmod{2813} \Rightarrow \gcd(1647, 2813) = 1 \\
+k = 6: &\quad 2^{720} \equiv 777 \pmod{2813} \Rightarrow \gcd(776, 2813) = \boxed{97}
+\end{align*}
+
+Sonuç: $97 \mid 2813$ bulundu!
+\end{examplebox}
+
+\begin{warningbox}
+Eğer $2^{k!} \equiv 1 \pmod{n}$ ise, yöntem başarısız olur.  
+Örnek: $n = 3277$ için $2^{7!} \equiv 1 \pmod{3277} \Rightarrow \gcd(0, 3277) = 3277$  
+Bu, başarısız bir sonuçtur.
+\end{warningbox}
+
+\begin{highlightbox}
+Yöntemde $2$ yerine başka bir taban $b$ de kullanılabilir.  
+Koşul: $1 < b < p$ olmalıdır.
+\end{highlightbox}
+
+\begin{discussionbox}
+Fermat'nın küçük teoremine geri dönelim:
+
+Eğer $a^{n-1} \equiv 1 \pmod{n}$ ve $n \nmid a$ ise, bu $n$'nin asal olduğunu garanti eder mi?
+
+Eğer doğruysa, bunu kanıtlayabilir miyiz?  
+Değilse, bir karşı örnek bulabilir miyiz?
+
+Bu soruya bir sonraki bölümde devam edeceğiz.
+\end{discussionbox}
+
+% ------------------- BÖLÜM 1.9 -------------------
+\section*{1.9 Euler Teoremi}
+
+Fermat'nın küçük teoremi, yalnızca asal sayı modülleri içeren kongruanslarla çalışmamıza olanak tanır. Bu teorem bize öyle bir pozitif tamsayı $f(p)$ olduğunu söyler ki:
+\[
+a^{f(p)} \equiv 1 \pmod{p}
+\]
+Burada $f(p) = p - 1$'dir. Bu noktada akla şu doğal soru gelir: Fermat'nın küçük teoremini, herhangi bir modül $m$ için genelleyebilir miyiz? Yani $(a, m) = 1$ olacak şekilde:
+\[
+a^{f(m)} \equiv 1 \pmod{m}
+\]
+olacak bir üs $f(m)$ var mıdır? Bu soruya yanıt vermeden önce aşağıdaki örneği incelemek faydalı olacaktır.
+
+\begin{examplebox}{Örnek 1.17}
+$a^{f(m)} \equiv 1 \pmod{m}$ olacak şekilde bir pozitif tamsayı $f(m)$ olup olmadığını belirleyiniz. Burada $m = 4$, $9$ ve $12$; $a$ ise $a \leq m$ ve $a$ ile $m$ aralarında asal olan pozitif tamsayıdır.
+
+\textbf{Çözüm:}
+
+1. $m = 4$ için, $a \leq 4$ ve aralarında asal olan sayılar: 1 ve 3. \\
+$1^2 \equiv 1 \pmod{4}$ ve $3^2 \equiv 9 \equiv 1 \pmod{4}$ olduğundan $f(4) = 2$ işe yarar.
+
+2. $m = 9$ için, $a \leq 9$ ve aralarında asal olan sayılar: 1, 2, 4, 5, 7, 8. Bunların altıncı kuvvetleri:
+
+\[
+\begin{aligned}
+1^6 &\equiv 1 \pmod{9}, & 2^6 &\equiv 1 \pmod{9}, & 4^6 &\equiv 1 \pmod{9}, \\
+5^6 &\equiv 1 \pmod{9}, & 7^6 &\equiv 1 \pmod{9}, & 8^6 &\equiv 1 \pmod{9}
+\end{aligned}
+\]
+
+\begin{multicols}{2}
+\subsection*{Tablo 1.4: Mod 9 Kuvvetler}
+\begin{center}
+\begin{tabular}{c|ccccc}
+\toprule
+$a$ & $a^2$ & $a^3$ & $a^4$ & $a^5$ & $a^6$ \\
+\midrule
+1 & 1 & 1 & 1 & 1 & 1 \\
+2 & 4 & 8 & 7 & 5 & 1 \\
+4 & 7 & 1 & 4 & 7 & 1 \\
+5 & 7 & 8 & 4 & 2 & 1 \\
+7 & 4 & 1 & 7 & 4 & 1 \\
+8 & 1 & 8 & 1 & 8 & 1 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\columnbreak
+
+\subsection*{Tablo 1.5: Mod 12 Kuvvetler}
+\begin{center}
+\begin{tabular}{c|cccc}
+\toprule
+$a$ & $a^2$ & $a^3$ & $a^4$ \\
+\midrule
+1 & 1 & 1 & 1 \\
+5 & 1 & 5 & 1 \\
+7 & 1 & 7 & 1 \\
+11 & 1 & 11 & 1 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{multicols}
+
+3. $m = 12$ için, $a \leq 12$ ve aralarında asal olan sayılar: 1, 5, 7, 11. Bunların dördüncü kuvvetleri:
+\[
+\begin{aligned}
+1^4 &\equiv 1 \pmod{12}, & 5^4 &\equiv 625 \equiv 1 \pmod{12}, \\
+7^4 &\equiv 2401 \equiv 1 \pmod{12}, & 11^4 &\equiv 14641 \equiv 1 \pmod{12}
+\end{aligned}
+\]
+
+\textit{Yani $f(12) = 4$. [Dikkat: $2$ için de aynı durum geçerlidir: $1^2 \equiv 1 \pmod{12}$, $5^2 \equiv 1 \pmod{12}$, $7^2 \equiv 1 \pmod{12}$ ve $11^2 \equiv 1 \pmod{12}$.]}
+\end{examplebox}
+
+\begin{tcolorbox}[colback=blue!5,colframe=blue!50!black,title=Leonhard Euler (1707-1783),fonttitle=\bfseries]
+\begin{wrapfigure}{l}{0.3\textwidth}  % Genişliği küçülttüm
+  \centering
+  \includegraphics[width=\linewidth,height=4cm,keepaspectratio]{euler.jpg}  % Boyutları kontrol altına aldım
+\end{wrapfigure}
+\justifying
+Euler İsviçre'nin Basel şehrinde doğmuştur. Babası hem matematikçi hem de Kalvinist pastördü ve Euler'in de aynı yolu izlemesini istemekteydi. Ancak Euler'in büyük yeteneği, Bernoulli tarafından fark edilmiş ve matematik yolculuğu başlamıştır. 
+
+Henüz 19 yaşında ilk makalesini yazmış, Paris Akademi Ödülü'nü 72 kez kazanmış ve her matematik alanında iz bırakmıştır. Olağanüstü hafızası ve çalışkanlığıyla her yerde çalışabilen bir deha olarak anılmıştır.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=blue!5, colframe=blue!40!black, title=Tanım, fonttitle=\bfseries, sharp corners, boxrule=0.6pt]
+$m$ pozitif bir tamsayı olsun. O zaman Euler'in phi fonksiyonu $\phi(m)$, $m$'ye eşit veya küçük ve $m$ ile aralarında asal olan pozitif tamsayıların sayısını ifade eder.
+\end{tcolorbox}
+
+\vspace{1em}
+
+\noindent \textbf{\"Ornek 1.17'ye g\"ore:}
+\begin{align*}
+\phi(4) &= 2 \quad & (1, 3) \\
+\phi(9) &= 6 \quad & (1, 2, 4, 5, 7, 8) \\
+\phi(12) &= 4 \quad & (1, 5, 7, 11)
+\end{align*}
+
+\vspace{1em}
+
+\noindent Ayr\"ica $1 \leq 1$ ve $1$ kendisiyle aralarında asal olduğundan:
+\[
+\phi(1) = 1
+\]
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, title=\textbf{\"Ornek 1.18: $\phi(11)$ ve $\phi(18)$ Hesaplama}, fonttitle=\bfseries, sharp corners]
+\textbf{\"C\"oz\"um:}\\
+$11$ bir asal sayı olduğundan, $11$'den küçük olan t\"um pozitif tamsayılar $11$ ile aralarında asaldır. Bu nedenle:
+\[
+\phi(11) = 10
+\]
+
+$18$ için ise, $18$'den küçük olup $18$ ile aralarında asal olan pozitif tamsayılar: $1, 5, 7, 11, 13, 17$'dir. Bu durumda:
+\[
+\phi(18) = 6
+\]
+
+(Not: Her birinin altıncı kuvvetinin $\pmod{18}$ altında $1$'e denk olduğunu doğrulayabilirsiniz.)
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=yellow!5, colframe=orange!50!black, title=\textbf{Lemma 1.5: Asal Sayılar ve $\phi$ Fonksiyonu}, fonttitle=\bfseries, sharp corners]
+Bir pozitif tamsayı $p$, ancak ve ancak $\phi(p) = p - 1$ ise asaldır.
+
+\textbf{İspat:}\\
+$p$ asal bir sayı olsun. O zaman $p$'ye eşit veya küçük ve $p$ ile aralarında asal olan $p - 1$ pozitif tamsayı vardır. Bu nedenle:
+\[
+\phi(p) = p - 1
+\]
+
+Tersine, $\phi(p) = p - 1$ olduğunu varsayalım. $1 < d < p$ olacak şekilde $d \mid p$ olsun. Bu durumda $d$ sayısı $p$'den küçük bir bölen olur ve $(d, p) \ne 1$ olacağından $\phi(p) < p - 1$ olur ki bu bir çelişkidir. Bu nedenle $p$ asal olmalıdır.
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=blue!5, colframe=blue!60!black, title=\textbf{Euler Teoremi'ne Giriş}, fonttitle=\bfseries, sharp corners]
+Artık sayı kuramının gelişiminde bir sonraki kilometre taşı olan ve en meşhur sonuçlardan biri kabul edilen Euler teoremini inceleyebiliriz. Euler tarafından 1760 yılında ispatlanan bu teorem, Fermat'ın küçük teoremini herhangi bir modül için genelleştirir.
+
+Ancak teoremi çalışmadan önce, onun ispatında kullanılacak olan öncül bir lemmanın zemini hazırlanmalıdır.
+
+Lemma 1.4'te, $a, 2a, \ldots, (p-1)a$ sayı dizisinin mod $p$'ye göre en küçük kalanı, $1, 2, \ldots, (p-1)$ sayılarının yeniden düzenlenmiş hali olduğunu gördük. Burada $a$, $p$ ile aralarında asal bir tamsayıdır. 
+
+Aşağıdaki lemma bu sonucu keyfi bir modül için genelleştirir. İspatı, Lemma 1.2'nin ispatına oldukça benzerdir. Ancak önce, ispatı daha iyi anlayabilmek için bir örnek verilecektir.
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, title=\textbf{Örnek 1.21: Mod 12'de En Küçük Kalıntılar}, fonttitle=\bfseries, sharp corners]
+$m = 12$ ve $a = 35$ olsun. Böylece $(a, m) = (35, 12) = 1$ olur. Örnek 1.15'e göre, 12 ile aralarında asal olan ve mod 12'ye göre en küçük kalıntılar: $1, 5, 7, 11$'dir.
+
+\textbf{Her biri 35 ile çarpıldığında:}
+\begin{align*}
+35 \cdot 1 &\equiv 11 \pmod{12} \\
+35 \cdot 5 &\equiv 7 \pmod{12} \\
+35 \cdot 7 &\equiv 5 \pmod{12} \\
+35 \cdot 11 &\equiv 1 \pmod{12}
+\end{align*}
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=red!5, colframe=red!50!black, title=\textbf{\"Ornek 1.18: Mod 15'te Euler Fonksiyonu}, fonttitle=\bfseries, sharp corners]
+$m = 15$ ve $a = 8$ olsun ($(8,15)=1$). $\phi(15)=8$ olduğunu g\"osterip, 8 ile çarpımın mod 15'teki etkisini inceleyelim.
+
+\textbf{\"C\"oz\"um:}\\
+15 ile aralarında asal sayılar: $1,2,4,7,8,11,13,14$ ($\phi(15)=8$).
+
+Bu sayıları 8 ile çarpalım:
+\begin{align*}
+8\times1 &\equiv8 \pmod{15} \\
+8\times2 &\equiv1 \pmod{15} \\
+8\times4 &\equiv2 \pmod{15} \\
+8\times7 &\equiv11 \pmod{15} \\
+8\times8 &\equiv4 \pmod{15} \\
+8\times11 &\equiv13 \pmod{15} \\
+8\times13 &\equiv14 \pmod{15} \\
+8\times14 &\equiv7 \pmod{15}
+\end{align*}
+G\"or\"uld\"uğ\"u gibi sonuçlar yine aynı k\"umede perm\"utasyon oluşturur.
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=green!5, colframe=green!50!black, title=\textbf{Sonuç 1.4: Euler Fonksiyonunun Çarpımsallığı}, fonttitle=\bfseries, sharp corners]
+Eğer $(m,n)=1$ ise, Euler'in phi fonksiyonu çarpımsaldır:
+\[
+\phi(mn) = \phi(m)\phi(n)
+\]
+
+\textbf{\"Ornek:}\\
+$\phi(15)=\phi(3)\phi(5)=2\times4=8$ (\"Ornek 1.18 ile uyumlu)
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=purple!5, colframe=purple!50!black, title=\textbf{Teorem 1.13: Euler Teoremi}, fonttitle=\bfseries, sharp corners]
+$(a,m)=1$ olacak şekilde herhangi bir $a$ tamsayısı ve $m>1$ pozitif tamsayısı için:
+\[
+a^{\phi(m)} \equiv 1 \pmod{m}
+\]
+
+\textbf{İspat:}\\
+$\phi(m)=k$ olsun ve $m$ ile aralarında asal olan sayılar $r_1,r_2,...,r_k$ olsun.
+
+\"Ornek 1.18'de g\"or\"uld\"uğ\"u gibi, bu sayılar $a$ ile çarpıldığında yine aynı k\"umede perm\"utasyon oluşur:
+\[
+(ar_1)(ar_2)\cdots(ar_k) \equiv r_1r_2\cdots r_k \pmod{m}
+\]
+
+Buradan:
+\[
+a^k(r_1r_2\cdots r_k) \equiv r_1r_2\cdots r_k \pmod{m}
+\]
+
+$(r_1r_2\cdots r_k,m)=1$ olduğundan sadeleştirerek:
+\[
+a^{\phi(m)} \equiv 1 \pmod{m}
+\]
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=blue!5, colframe=blue!40!black, title=\textbf{Örnek 1.22: Mod 10'da Euler Fonksiyonu}, fonttitle=\bfseries, sharp corners]
+$m = 10$ ve $a = 3$ olsun ($(3,10)=1$). $\phi(10)=4$ olduğunu gösterip, 3 ile çarpımın mod 10'daki etkisini inceleyelim.
+
+\textbf{Çözüm:}\\
+10 ile aralarında asal sayılar: $1,3,7,9$ ($\phi(10)=4$).
+
+Bu sayıları 3 ile çarpalım:
+\begin{align*}
+3\times1 &\equiv3 \pmod{10} \\
+3\times3 &\equiv9 \pmod{10} \\
+3\times7 &\equiv1 \pmod{10} \\
+3\times9 &\equiv7 \pmod{10}
+\end{align*}
+Sonuçlar yine orijinal kümenin bir permütasyonudur.
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=orange!5, colframe=orange!50!black, title=\textbf{Sonuç 1.5: Euler Fonksiyonu ve Asal Kuvvetler}, fonttitle=\bfseries, sharp corners]
+$p$ asal ve $k \geq 1$ için:
+\[
+\phi(p^k) = p^k - p^{k-1}
+\]
+
+\textbf{İspat:}\\
+$1$ ile $p^k$ arasında $p$ ile bölünen $p^{k-1}$ tane sayı vardır. Dolayısıyla:
+\[
+\phi(p^k) = p^k - p^{k-1} = p^{k-1}(p-1)
+\]
+
+\textbf{\"Ornek:}\\
+$\phi(8) = \phi(2^3) = 8-4 = 4$ \\
+$\phi(9) = \phi(3^2) = 9-3 = 6$
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=green!5, colframe=green!40!black, title=\textbf{Teorem 1.14: Euler Fonksiyonu Formülü}, fonttitle=\bfseries, sharp corners]
+$n = p_1^{k_1}p_2^{k_2}\cdots p_r^{k_r}$ şeklinde asal çarpanlarına ayrılmış bir sayı olsun. O zaman:
+\[
+\phi(n) = n\left(1-\frac{1}{p_1}\right)\left(1-\frac{1}{p_2}\right)\cdots\left(1-\frac{1}{p_r}\right)
+\]
+
+\textbf{İspat:}\\
+Sonuç 1.4 ve 1.5 kullanılarak:
+\[
+\phi(n) = \prod_{i=1}^r \phi(p_i^{k_i}) = \prod_{i=1}^r p_i^{k_i}\left(1-\frac{1}{p_i}\right) = n\prod_{i=1}^r \left(1-\frac{1}{p_i}\right)
+\]
+
+\textbf{\"Ornek:}\\
+$\phi(12) = 12\left(1-\frac{1}{2}\right)\left(1-\frac{1}{3}\right) = 12\times\frac{1}{2}\times\frac{2}{3} = 4$
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=yellow!5, colframe=yellow!50!black, title=\textbf{Lemma 1.6: Çarpımsal Fonksiyonlar}, fonttitle=\bfseries, sharp corners]
+Euler'in phi fonksiyonu çarpımsal bir fonksiyondur, yani $(m,n)=1$ ise:
+\[
+\phi(mn) = \phi(m)\phi(n)
+\]
+
+\textbf{İspat:}\\
+Teorem 1.14'ün doğrudan sonucudur. Asal çarpanlara ayrıştırma kullanılarak kolayca gösterilebilir.
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=green!5, colframe=green!40!black, title=\textbf{Lemma 1.6: Permütasyon Özelliği}, fonttitle=\bfseries, sharp corners]
+$m$ pozitif bir tamsayı ve $(a, m) = 1$ olacak şekilde herhangi bir $a$ tamsayısı olsun. $r_1, r_2, \ldots, r_{\phi(m)}$, $m$'ye eşit veya küçük ve $m$ ile aralarında asal olan $\phi(m)$ pozitif tamsayıyı göstersin. 
+
+O halde, $ar_1, ar_2, \ldots, ar_{\phi(m)}$ ifadelerinin mod $m$'ye göre en küçük kalıntıları, $r_1, r_2, \ldots, r_{\phi(m)}$ dizisinin bir permütasyonudur.
+
+\vspace{0.5em}
+
+\textbf{İspat:} \\
+İspat iki kısımdan oluşur. Önce, her $(ar_i, m) = 1$ olduğunu göstereceğiz. Daha sonra, $i \ne j$ için $ar_i \not\equiv ar_j \pmod{m}$ olduğunu göstereceğiz. Burada $1 \leq i < j \leq \phi(m)$.
+
+\textbf{1. Her $ar_i$ ifadesi $m$ ile aralarında asaldır:} \\
+Aksi takdirde $(ar_i, m) > 1$ olsun. $(ar_i, m)$'nin asal bir böleni $p$ olsun. Yani $p \mid ar_i$ ve $p \mid m$.
+
+Eğer $p \mid r_i$ ise, o halde $p \mid r_i$ ve $p \mid m$, bu da $(r_i, m) \ne 1$ olur ve bu çelişkidir. 
+
+Eğer $p \mid a$ ise, $p \mid a$ ve $p \mid m$ olduğundan $(a, m) \ne 1$ olur, bu da bir başka çelişkidir. 
+
+Dolayısıyla $(ar_i, m) = 1$'dir. Yani, $ar_1, ar_2, \ldots, ar_{\phi(m)}$ sayılarının her biri $m$ ile aralarında asaldır.
+
+\vspace{0.5em}
+
+\textbf{2. $ar_i \equiv ar_j \pmod{m}$ ise, $i = j$ olmalıdır:} \\
+Aksi halde $ar_i \equiv ar_j \pmod{m}$ ve $i \ne j$ olsun. $(a, m) = 1$ olduğundan, Teorem 1.6'ya göre $r_i \equiv r_j \pmod{m}$ olur. 
+
+Ancak $r_i$ ve $r_j$, mod $m$'ye göre en küçük kalıntılar olduğundan $r_i = r_j$ olmalıdır. Bu da $i = j$'yi gerektirir; oysa varsayımımız $i \ne j$ idi. Çelişki elde ettik.
+
+\vspace{0.5em}
+
+Sonuç olarak, $ar_1, ar_2, \ldots, ar_{\phi(m)}$ sayılarının mod $m$'ye göre en küçük kalıntıları birbirinden farklıdır ve sayıca $\phi(m)$ tanedir. Dolayısıyla bu kalıntılar, $r_1, r_2, \ldots, r_{\phi(m)}$ dizisinin bir permütasyonudur.
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=gray!5, colframe=black, title=\textbf{Örnek 1.23: Euler Teoremi Uygulaması}, fonttitle=\bfseries, sharp corners]
+$m = 12$ ve $a = 35$ olsun. Mod $12$'ye göre, $12$ ile aralarında asal olan en küçük kalıntılar $1, 5, 7$ ve $11$'dir. Bu nedenle $\phi(12) = 4$.
+
+Örnek 1.21'ye göre, $35 \cdot 1$, $35 \cdot 5$, $35 \cdot 7$ ve $35 \cdot 11$ ifadelerinin mod 12'ye göre en küçük kalıntıları, $1, 5, 7, 11$ dizisinin yeniden düzenlenmiş halidir.
+
+Bu durumda:
+\[
+(35 \cdot 1)(35 \cdot 5)(35 \cdot 7)(35 \cdot 11) \equiv 1 \cdot 5 \cdot 7 \cdot 11 \pmod{12}
+\]
+
+Yani:
+\[
+35^4 \cdot (1 \cdot 5 \cdot 7 \cdot 11) \equiv 1 \cdot 5 \cdot 7 \cdot 11 \pmod{12}
+\]
+
+Ancak $(1 \cdot 5 \cdot 7 \cdot 11,\ 12) = 1$ olduğundan, Teorem 1.6'ya göre:
+\[
+35^4 \equiv 1 \pmod{12}
+\]
+
+Yani:
+\[
+35^{\phi(12)} \equiv 1 \pmod{12}
+\]
+
+Bu, Euler teoreminin doğrudan bir uygulamasıdır.
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=green!5, colframe=green!50!black, title=\textbf{Teorem 1.15 (Euler Teoremi)}, fonttitle=\bfseries, sharp corners]
+$m$ pozitif bir tamsayı ve $(a, m) = 1$ olacak şekilde herhangi bir $a$ tamsayısı olsun. O zaman:
+\[
+a^{\phi(m)} \equiv 1 \pmod{m}
+\]
+
+\textbf{İspat:} \\
+$r_1, r_2, \ldots, r_{\phi(m)}$ sayıları, mod $m$'ye göre en küçük kalıntılar olup $m$ ile aralarında asaldır.
+
+Lemma 1.6'ya göre, $ar_1, ar_2, \ldots, ar_{\phi(m)}$ sayıları, mod $m$'ye göre $r_1, r_2, \ldots, r_{\phi(m)}$ sayılarının bir permütasyonudur. Dolayısıyla:
+\[
+(ar_1)(ar_2) \cdots (ar_{\phi(m)}) \equiv r_1 r_2 \cdots r_{\phi(m)} \pmod{m}
+\]
+
+Bu da şu anlama gelir:
+\[
+a^{\phi(m)} \cdot r_1 r_2 \cdots r_{\phi(m)} \equiv r_1 r_2 \cdots r_{\phi(m)} \pmod{m}
+\]
+
+Her $r_i$ sayısı $m$ ile aralarında asal olduğundan:
+\[
+\gcd(r_1 r_2 \cdots r_{\phi(m)},\ m) = 1
+\]
+
+Bu nedenle, Teorem 1.6'ya göre her iki taraf da $r_1 r_2 \cdots r_{\phi(m)}$ ile sadeleştirilebilir ve sonuç olarak:
+\[
+a^{\phi(m)} \equiv 1 \pmod{m}
+\]
+
+Bu Euler teoreminin ispatıdır.
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=gray!5, colframe=gray!60!black, title=\textbf{Örnek 1.24: Euler Teoreminin Uygulaması}, fonttitle=\bfseries, sharp corners]
+
+$m = 24$ ve $a$, $24$ ile aralarında asal herhangi bir tamsayı olsun. \\
+
+$24$'ten küçük ve $24$ ile aralarında asal olan sekiz pozitif tamsayı vardır: 
+\[
+1, 5, 7, 11, 13, 17, 19, 23
+\]
+Bu nedenle:
+\[
+\phi(24) = 8
+\]
+
+Euler Teoremi'ne göre:
+\[
+a^8 \equiv 1 \pmod{24}
+\]
+
+\textbf{Özellikle} $a = 77$ alalım. $77 = 7 \cdot 11$ olduğundan ve hem $7$ hem $11$, $24$ ile aralarında asal olduğundan:
+\[
+(77, 24) = 1
+\]
+Dolayısıyla:
+\[
+77^8 \equiv 1 \pmod{24}
+\]
+
+Bu sonucu kongruansın temel özelliklerini kullanarak doğrulayabiliriz. Öncelikle:
+\[
+77 \equiv 5 \pmod{24}
+\]
+O halde:
+\[
+77^8 \equiv 5^8 \pmod{24}
+\]
+Ancak $5^2 \equiv 1 \pmod{24}$ olduğundan:
+\[
+5^8 = (5^2)^4 \equiv 1^4 = 1 \pmod{24}
+\]
+\textbf{Sonuç olarak:}
+\[
+77^8 \equiv 1 \pmod{24}
+\]
+Bu da Euler Teoremi'nin öngördüğü sonucu doğrular.
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=blue!3, colframe=blue!70!black, title=\textbf{Euler Teoreminin Uygulaması Üzerine Not}, fonttitle=\bfseries, sharp corners]
+Euler Teoremi, bölen asal olmasa bile — yani bileşik sayı olsa dahi — üsleri büyük olan sayıların kalanı (mod) hesaplanırken oldukça kullanışlıdır. 
+
+Tek şart, taban ile bölenin aralarında asal olmasıdır. Aşağıdaki örnek, bu durumu örneklemektedir.
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=gray!5, colframe=black, title=\textbf{Örnek 1.25: $245^{1040}$ ifadesinin 18 ile bölümünden kalanı bulunuz}, fonttitle=\bfseries, sharp corners]
+
+\textbf{Çözüm:}
+
+Öncelikle, $245 \equiv 11 \pmod{18}$ olduğundan:
+
+\[
+245^{1040} \equiv 11^{1040} \pmod{18}
+\]
+
+$11$ ve $18$ aralarında asal olduğu için, Euler Teoremi uygulanabilir. $\phi(18) = 6$ olduğundan:
+
+\[
+11^6 \equiv 1 \pmod{18}
+\]
+
+$1040 = 6 \cdot 173 + 2$ olduğundan:
+
+\[
+11^{1040} = (11^6)^{173} \cdot 11^2 \equiv 1^{173} \cdot 121 \equiv 121 \pmod{18}
+\]
+
+Son olarak:
+
+\[
+121 \div 18 = 6 \text{ kalanı } 13 \quad \Rightarrow \quad 121 \equiv 13 \pmod{18}
+\]
+
+\textbf{Sonuç:} Aradığımız kalan $13$'tür.
+
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=blue!5, colframe=blue!50!black, title=\textbf{Sonuç 1.26 (Fermat'nın Küçük Teoremi)}, fonttitle=\bfseries, sharp corners]
+
+$p$ bir asal sayı ve $a$, $p$'ye bölünmeyen herhangi bir tamsayı olsun. O zaman:
+
+\[
+a^{p - 1} \equiv 1 \pmod{p}
+\]
+
+\textbf{İspat:} \\
+Euler Teoremi'ne göre:
+
+\[
+a^{\phi(p)} \equiv 1 \pmod{p}
+\]
+
+Ancak Lemma 1.5'e göre $\phi(p) = p - 1$ olduğundan:
+
+\[
+a^{p - 1} \equiv 1 \pmod{p}
+\]
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=red!5, colframe=red!50!black, title=\textbf{Örnek 1.26: Fermat'nın Küçük Teoremi Uygulaması}, fonttitle=\bfseries, sharp corners]
+$p = 17$ (asal) ve $a = 3$ ($17$'ye bölünmeyen) olsun. Fermat'nın küçük teoremine göre:
+
+\[
+3^{16} \equiv 1 \pmod{17}
+\]
+
+Bu sonucu doğrudan hesaplayarak doğrulayalım:
+\begin{eqnarray*}
+3^2 \equiv 9 \pmod{17} \implies 3^4 \equiv (3^2)^2 \equiv 81 \equiv 13 \pmod{17}
+&&\text{ } \\
+3^8 \equiv (3^4)^2 \equiv 169 \equiv 16 \pmod{17} \implies 3^{16} \equiv (3^8)^2 \equiv 256 \equiv 1 \pmod{17}
+\end{eqnarray*}
+
+Böylece teorem doğrulanmış olur.
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=green!5, colframe=green!50!black, title=\textbf{Sonuç 1.27: Euler-Fermat Genellemesi}, fonttitle=\bfseries, sharp corners]
+$m > 1$ pozitif tamsayısı ve $(a,m) = 1$ olacak şekilde herhangi bir $a$ tamsayısı için, $k \equiv \ell \pmod{\phi(m)}$ ise:
+
+\[
+a^k \equiv a^\ell \pmod{m}
+\]
+
+\textbf{İspat:} \\
+$k = \ell + t\phi(m)$ yazılabilir. Euler Teoremi'ne göre:
+
+\[
+a^k = a^{\ell + t\phi(m)} = a^\ell (a^{\phi(m)})^t \equiv a^\ell \cdot 1^t = a^\ell \pmod{m}
+\]
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=purple!5, colframe=purple!50!black, title=\textbf{Teorem 1.16: Modüler Tersin Varlığı}, fonttitle=\bfseries, sharp corners]
+$(a,m) = 1$ ise, $a$'nın mod $m$'de bir tersi vardır ve bu ters:
+
+\[
+a^{\phi(m)-1} \pmod{m}
+\]
+
+\textbf{İspat:} \\
+Euler Teoremi'ne göre:
+
+\[
+a^{\phi(m)} \equiv 1 \pmod{m} \implies a \cdot a^{\phi(m)-1} \equiv 1 \pmod{m}
+\]
+
+Bu da $a^{\phi(m)-1}$'in $a$'nın mod $m$'deki tersi olduğunu gösterir.
+\end{tcolorbox}
+
+\vspace{1em}
+
+Euler Teoremi kullanılarak, Teorem 1.5 ve 1.6'nın sonuçları keyfi bir $m$ modülü için de genişletilebilir. Aşağıdaki iki teorem bu genelleştirmeleri göstermektedir. \\
+(İspatları okura egzersiz olarak bırakılmıştır.)
+\vspace{2em}
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, title=\textbf{Teorem 1.16: Modüler Ters}, fonttitle=\bfseries, sharp corners]
+$m$ pozitif bir tamsayı ve $a$, $m$ ile aralarında asal bir tamsayı olsun. O zaman:
+
+\[
+a^{\phi(m) - 1}
+\]
+
+mod $m$'ye göre $a$'nın tersidir.
+\end{tcolorbox}
+
+\vspace{1em}
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, title=\textbf{Teorem 1.12: Lineer Kongruansın Çözümü}, fonttitle=\bfseries, sharp corners]
+$m$ pozitif bir tamsayı ve $a$, $m$ ile aralarında asal bir tamsayı olsun. O zaman:
+
+\[
+ax \equiv b \pmod{m}
+\]
+
+lineer kongruansının çözümü şudur:
+\[
+x \equiv a^{\phi(m) - 1} \cdot b \pmod{m}
+\]
+\end{tcolorbox}
+
+\vspace{1em}
+
+Aşağıdaki örnek bu sonucu kullanmaktadır.
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=gray!5, colframe=black, title=\textbf{Örnek 1.27: Lineer Kongruansın Çözümü}, fonttitle=\bfseries, sharp corners]
+\textbf{Problem:}\\
+Aşağıdaki lineer kongruansı çözünüz:
+\[
+35x \equiv 47 \pmod{24}
+\]
+
+\textbf{Çözüm:}\\
+Kongruans sadeleştirilerek şu hale getirilebilir:
+\[
+11x \equiv -1 \pmod{24}
+\]
+
+Çünkü $35 \equiv 11 \pmod{24}$ ve $47 \equiv -1 \pmod{24}$.
+
+$11$ ve $24$ aralarında asal olduğundan, Teorem 1.12'ye göre:
+\[
+x \equiv 11^{\phi(24)-1} \cdot (-1) \pmod{24}
+\]
+
+\[
+x \equiv 11^7 \cdot (-1) \pmod{24}
+\]
+
+Hesaplayalım:
+\[
+11^2 \equiv 1 \pmod{24} \Rightarrow 11^6 \equiv 1 \pmod{24}
+\Rightarrow 11^7 \equiv 11 \pmod{24}
+\]
+
+Dolayısıyla:
+\[
+x \equiv 11 \cdot (-1) \equiv -11 \equiv 13 \pmod{24}
+\]
+
+\textbf{Sonuç:} $x \equiv 13 \pmod{24}$
+\end{tcolorbox}
+
+\vspace{2em}
+
+\begin{tcolorbox}[colback=yellow!5, colframe=orange!60!black, title=\textbf{Euler Teoremi Üzerine Sonuçlar ve Genellemeler}, fonttitle=\bfseries, sharp corners]
+
+\textbf{Not:} Teorem 1.17'de $a$'nın mod $m$'ye göre tersini bulmak ve dolayısıyla $ax \equiv b \pmod{m}$ kongruansını çözmek için $\phi(m)$ değerini hesaplamamız gerekir.
+
+Eğer $m$ asal bir sayıysa, Lemma 1.5 bu değeri bize verir. Ancak $m$ bileşik bir sayıysa, $m$'den küçük ve $m$ ile aralarında asal olan tüm pozitif tamsayıları listeleyip saymak pratik değildir.
+
+Ayrıca, Euler teoremi, modülleri karşılıklı asal olan bir lineer kongruans sistemi çözümü için de formül geliştirmede kullanılabilir. (Bkz. Alıştırmalar 62-67.)
+
+Sıradaki teorem, Euler teoreminin bir genellemesidir. İspatı oldukça doğrudandır, bu nedenle okura alıştırma olarak bırakılmıştır. (Bkz. Alıştırmalar 59 ve 60.)
+
+\begin{center}
+\textbf{TEOREM 1.17 (Koshy, 1996)}\\
+$m_1, m_2, \ldots, m_k$ pozitif tamsayılar ve $a$ herhangi bir tamsayı olmak üzere, \\
+$(a, m_i) = 1$ koşulu $1 \leq i \leq k$ için sağlanıyorsa:
+\[
+a^{[\phi(m_1), \phi(m_2), \ldots, \phi(m_k)]} \equiv 1 \pmod{[m_1, m_2, \ldots, m_k]}
+\]
+\end{center}
+
+Bu teoremden aşağıdaki sonuç elde edilir:
+
+\begin{center}
+\textbf{SONUÇ 1.17}\\
+$m_1, m_2, \ldots, m_k$ karşılıklı asal tamsayılar ve $a$ herhangi bir tamsayı olmak üzere, \\
+$(a, m_i) = 1$ koşulu $1 \leq i \leq k$ için sağlanıyorsa:
+\[
+a^{[\phi(m_1), \phi(m_2), \ldots, \phi(m_k)]} \equiv 1 \pmod{m_1 m_2 \cdots m_k}
+\]
+\end{center}
+
+\end{tcolorbox}
+
+\end{document}
+
+\ifdefined\isSubfile
+\else
+\end{document}
+\fi
